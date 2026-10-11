@@ -1,0 +1,8 @@
+{
+  "name": "Remix FAZTA CELL - Kasir \u0026 Servis HP",
+  "description": "Aplikasi manajemen kasir \u0026 servis HP, pencatatan kas, stok sparepart, forecasting laba, kelola slip gaji karyawan via WhatsApp, dan integrasi Firebase \u0026 Authorized Domain.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

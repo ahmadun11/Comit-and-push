@@ -1,0 +1,127 @@
+{
+  "entities": {
+    "ServisItem": {
+      "title": "ServisItem",
+      "description": "Catatan nota servis handphone",
+      "type": "object",
+      "properties": {
+        "noNota": { "type": "string" },
+        "tanggal": { "type": "string" },
+        "namaPelanggan": { "type": "string" },
+        "noHp": { "type": "string" },
+        "tipeHp": { "type": "string" },
+        "keluhan": { "type": "string" },
+        "jasaServis": { "type": "number" },
+        "totalBiaya": { "type": "number" },
+        "dp": { "type": "number" },
+        "status": { "type": "string" }
+      },
+      "required": ["noNota", "tanggal", "namaPelanggan", "tipeHp", "totalBiaya", "status"]
+    },
+    "TransaksiKas": {
+      "title": "TransaksiKas",
+      "description": "Pencatatan arus kas masuk dan keluar",
+      "type": "object",
+      "properties": {
+        "tanggal": { "type": "string" },
+        "jenis": { "type": "string", "enum": ["pemasukan", "pengeluaran"] },
+        "kategori": { "type": "string" },
+        "nominal": { "type": "number" },
+        "metode": { "type": "string" },
+        "keterangan": { "type": "string" }
+      },
+      "required": ["tanggal", "jenis", "nominal", "kategori"]
+    },
+    "Sparepart": {
+      "title": "Sparepart",
+      "description": "Data stok sparepart dan harga modal jual",
+      "type": "object",
+      "properties": {
+        "nama": { "type": "string" },
+        "stok": { "type": "number" },
+        "hargaModal": { "type": "number" },
+        "hargaJual": { "type": "number" }
+      },
+      "required": ["nama", "stok", "hargaModal", "hargaJual"]
+    },
+    "Karyawan": {
+      "title": "Karyawan",
+      "description": "Data teknisi dan karyawan konter",
+      "type": "object",
+      "properties": {
+        "nama": { "type": "string" },
+        "noHp": { "type": "string" },
+        "jabatan": { "type": "string" }
+      },
+      "required": ["nama"]
+    },
+    "LaporanTutupBuku": {
+      "title": "LaporanTutupBuku",
+      "description": "Arsip laporan tutup buku kasir berkala",
+      "type": "object",
+      "properties": {
+        "tglMulai": { "type": "string" },
+        "tglSelesai": { "type": "string" },
+        "tglEksekusi": { "type": "string" },
+        "totalPemasukan": { "type": "number" },
+        "totalPengeluaran": { "type": "number" },
+        "labaBersih": { "type": "number" }
+      },
+      "required": ["tglMulai", "tglSelesai", "totalPemasukan", "totalPengeluaran", "labaBersih"]
+    },
+    "JualBeliHp": {
+      "title": "JualBeliHp",
+      "description": "Data jual beli unit HP bekas/baru",
+      "type": "object",
+      "properties": {
+        "namaHp": { "type": "string" },
+        "hargaBeli": { "type": "number" },
+        "hargaJual": { "type": "number" },
+        "status": { "type": "string" }
+      },
+      "required": ["namaHp", "hargaBeli", "status"]
+    },
+    "AppUser": {
+      "title": "AppUser",
+      "description": "Pemetaan User ID ke Email dan UID",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "email": { "type": "string" },
+        "uid": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "email", "uid"]
+    }
+  },
+  "firestore": {
+    "/app_users/{userDoc}": {
+      "schema": "AppUser",
+      "description": "Pemetaan User ID publik untuk otentikasi login"
+    },
+    "/users/{userId}/servis/{servisId}": {
+      "schema": "ServisItem",
+      "description": "Koleksi nota servis milik pengguna/toko"
+    },
+    "/users/{userId}/kas/{kasId}": {
+      "schema": "TransaksiKas",
+      "description": "Koleksi transaksi kas milik pengguna/toko"
+    },
+    "/users/{userId}/sparepart/{sparepartId}": {
+      "schema": "Sparepart",
+      "description": "Koleksi sparepart milik pengguna/toko"
+    },
+    "/users/{userId}/karyawan/{karyawanId}": {
+      "schema": "Karyawan",
+      "description": "Koleksi karyawan/teknisi milik pengguna/toko"
+    },
+    "/users/{userId}/laporan_tutup_buku/{laporanId}": {
+      "schema": "LaporanTutupBuku",
+      "description": "Koleksi arsip tutup buku milik pengguna/toko"
+    },
+    "/users/{userId}/jual_beli/{jualBeliId}": {
+      "schema": "JualBeliHp",
+      "description": "Koleksi unit jual beli HP milik pengguna/toko"
+    }
+  }
+}
